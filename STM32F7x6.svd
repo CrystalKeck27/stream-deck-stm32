@@ -5530,6 +5530,7 @@
                <description>FIFO status and interrupt           register</description>
                <addressOffset>0x84</addressOffset>
                <size>0x20</size>
+               <access>read-write</access>
                <resetValue>0x00000040</resetValue>
                <fields>
                   <field>
@@ -6099,6 +6100,7 @@
                <displayName>SDCMR</displayName>
                <description>SDRAM Command Mode register</description>
                <addressOffset>0x150</addressOffset>
+               <access>read-write</access>
                <size>0x20</size>
                <resetValue>0x00000000</resetValue>
                <fields>
@@ -6107,21 +6109,24 @@
                      <description>Command mode</description>
                      <bitOffset>0</bitOffset>
                      <bitWidth>3</bitWidth>
-                     <access>write-only</access>
+                     <access>read-write</access>
+                     <!-- <access>write-only</access> -->
                   </field>
                   <field>
                      <name>CTB2</name>
                      <description>Command target bank 2</description>
                      <bitOffset>3</bitOffset>
                      <bitWidth>1</bitWidth>
-                     <access>write-only</access>
+                     <access>read-write</access>
+                     <!-- <access>write-only</access> -->
                   </field>
                   <field>
                      <name>CTB1</name>
                      <description>Command target bank 1</description>
                      <bitOffset>4</bitOffset>
                      <bitWidth>1</bitWidth>
-                     <access>write-only</access>
+                     <access>read-write</access>
+                     <!-- <access>write-only</access> -->
                   </field>
                   <field>
                      <name>NRFS</name>
@@ -6144,6 +6149,7 @@
                <displayName>SDRTR</displayName>
                <description>SDRAM Refresh Timer register</description>
                <addressOffset>0x154</addressOffset>
+               <access>read-write</access>
                <size>0x20</size>
                <resetValue>0x00000000</resetValue>
                <fields>
@@ -6152,7 +6158,8 @@
                      <description>Clear Refresh error flag</description>
                      <bitOffset>0</bitOffset>
                      <bitWidth>1</bitWidth>
-                     <access>write-only</access>
+                     <access>read-write</access>
+                     <!-- <access>write-only</access> -->
                   </field>
                   <field>
                      <name>COUNT</name>

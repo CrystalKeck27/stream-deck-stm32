@@ -15,11 +15,16 @@ cortex-m = { version = "0.7.6", features = ["inline-asm", "critical-section-sing
 cortex-m-rt = "0.7.0"
 # embedded-hal = "0.2.6"
 panic-probe = { version = "0.3", features = ["print-defmt"] }
+stm32-fmc = "0.3.2"
 
 [patch.crates-io]
-embassy-time = { git = "https://github.com/embassy-rs/embassy", rev = "45d9bd57575d9391a68334a2f3966b92032d5dc6" }
-embassy-executor = { git = "https://github.com/embassy-rs/embassy", rev = "45d9bd57575d9391a68334a2f3966b92032d5dc6" }
-embassy-stm32 = { git = "https://github.com/embassy-rs/embassy", rev = "45d9bd57575d9391a68334a2f3966b92032d5dc6" }
+# embassy-time = { git = "https://github.com/embassy-rs/embassy", rev = "45d9bd57575d9391a68334a2f3966b92032d5dc6" }
+# embassy-executor = { git = "https://github.com/embassy-rs/embassy", rev = "45d9bd57575d9391a68334a2f3966b92032d5dc6" }
+# embassy-stm32 = { git = "https://github.com/embassy-rs/embassy", rev = "45d9bd57575d9391a68334a2f3966b92032d5dc6" }
+embassy-time = { path = "../embassy/embassy-time" }
+embassy-executor = { path = "../embassy/embassy-executor" }
+embassy-stm32 = { path = "../embassy/embassy-stm32" }
+# stm32-fmc = { path = "../stm32-fmc" }
 
 [profile.release]
 debug = 2

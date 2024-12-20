@@ -6,6 +6,7 @@
         "request": "launch",
         "name": "probe_rs Executable launch example",
         "cwd": "${workspaceFolder}",
+        "preLaunchTask": "cargo build",
         //!MODIFY (or remove)
         "speed": 24000,
         //!MODIFY (or remove)
