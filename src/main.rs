@@ -1,21 +1,32 @@
 #![no_std]
 #![no_main]
 
+mod touchscreen;
+
+use core::cell::RefCell;
 use defmt::*;
+use embassy_embedded_hal::shared_bus::asynch::i2c::I2cDevice;
 use embassy_executor::Spawner;
 use embassy_stm32::{
     bind_interrupts,
     exti::ExtiInput,
     fmc::Fmc,
     gpio::{Level, Output, Pull, Speed},
-    i2c::{self, I2c},
+    i2c::{self},
     ltdc::{
         self, Ltdc, LtdcConfiguration, LtdcLayer, LtdcLayerConfig, PolarityActive, PolarityEdge,
     },
+    mode::Async,
     peripherals,
     time::Hertz,
 };
+use embassy_sync::{
+    blocking_mutex::{raw::NoopRawMutex, NoopMutex},
+    mutex::Mutex,
+};
 use embassy_time::{Delay, Timer};
+use embedded_hal_async::i2c::I2c;
+use static_cell::StaticCell;
 use {defmt_rtt as _, panic_probe as _};
 
 const DISPLAY_WIDTH: usize = 480;
@@ -27,6 +38,8 @@ bind_interrupts!(struct Irqs {
     I2C3_EV => i2c::EventInterruptHandler<peripherals::I2C3>;
     I2C3_ER => i2c::ErrorInterruptHandler<peripherals::I2C3>;
 });
+
+static I2C_BUS: StaticCell<Mutex<NoopRawMutex, i2c::I2c<'static, Async>>> = StaticCell::new();
 
 #[embassy_executor::main]
 async fn main(_spawner: Spawner) {
@@ -263,7 +276,7 @@ async fn main(_spawner: Spawner) {
 
     info!("Connecting to I2c");
 
-    let mut i2c = I2c::new(
+    let mut i2c = i2c::I2c::new(
         p.I2C3,
         p.PH7,
         p.PH8,
@@ -273,6 +286,9 @@ async fn main(_spawner: Spawner) {
         Hertz(100_000),
         Default::default(),
     );
+
+    let bus = I2C_BUS.init(Mutex::new(i2c));
+    let device1 = I2cDevice::new(bus);
 
     loop {
         // button.wait_for_any_edge().await;

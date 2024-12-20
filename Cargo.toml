@@ -16,6 +16,10 @@ cortex-m-rt = "0.7.0"
 # embedded-hal = "0.2.6"
 panic-probe = { version = "0.3", features = ["print-defmt"] }
 stm32-fmc = "0.3.2"
+embassy-embedded-hal = "0.2.0"
+embassy-sync = { version="0.6.1", features = ["defmt"] }
+static_cell = "2.1.0"
+embedded-hal-async = "1.0.0"
 
 [patch.crates-io]
 # embassy-time = { git = "https://github.com/embassy-rs/embassy", rev = "45d9bd57575d9391a68334a2f3966b92032d5dc6" }
@@ -24,6 +28,8 @@ stm32-fmc = "0.3.2"
 embassy-time = { path = "../embassy/embassy-time" }
 embassy-executor = { path = "../embassy/embassy-executor" }
 embassy-stm32 = { path = "../embassy/embassy-stm32" }
+embassy-embedded-hal = { path = "../embassy/embassy-embedded-hal" }
+embassy-sync = { path = "../embassy/embassy-sync" }
 # stm32-fmc = { path = "../stm32-fmc" }
 
 [profile.release]
