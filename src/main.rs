@@ -236,10 +236,6 @@ async fn main(_spawner: Spawner) {
     ltdc.enable();
 
     info!("filling framebuffer");
-    // for i in 0..DISPLAY_WIDTH * DISPLAY_HEIGHT {
-    // ram_slice[i] = (i as u32) | 0xFF000000;
-    // ram_slice[i] = 0xFF669933;
-    // }
     for x in 0..DISPLAY_WIDTH {
         for y in 0..DISPLAY_HEIGHT {
             if x < 30 {
@@ -254,7 +250,6 @@ async fn main(_spawner: Spawner) {
     ram_slice[DISPLAY_WIDTH - 1] = 0b00000_000000_11111;
     ram_slice[(DISPLAY_HEIGHT - 1) * DISPLAY_WIDTH] = 0b00000_000000_11111;
     ram_slice[DISPLAY_HEIGHT * DISPLAY_WIDTH - 1] = 0b00000_000000_11111;
-    // ram_slice[0] = 0xFFFF0000;
 
     println!("After filling framebuffer: {:?}", ram_slice[0..10]);
 
